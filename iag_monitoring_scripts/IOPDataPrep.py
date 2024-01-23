@@ -17,8 +17,8 @@ today = date.today()
 transactionBrowserRowCount = 1000000
 todaysDate = today.strftime("%m.%d")
 
-processedPath = "D:\IOP\IOP Phase II Sync\ProcessedFolder"
-sentPath = "D:\IOP\IOP Phase II Sync\SentFolder"
+processedPath = r"D:\IOP\IOP Phase II Sync\ProcessedFolder"
+sentPath = r"D:\IOP\IOP Phase II Sync\SentFolder"
 
 combinedACK = processACK(sentPath, processedPath)
 combinedICTX = processICTX(combinedACK, sentPath)
@@ -65,7 +65,6 @@ try:
 except:
     print("no ITXC")
 
-
 try:
     flterMissingIRXC.to_csv('missingCorrection ' + todaysDate +'.csv', index=False)
     ITXCtoIRXC.to_csv('mergedCorrectionFiles ' + todaysDate +'.csv', index=False)
@@ -74,7 +73,6 @@ try:
     homeCorrectionCount.to_csv('homeCorrectionCount ' + todaysDate +'.csv', index=True)
 except:
     print("no Home Correction files")
-    
 
 flterMissingIRXCAway, ITXCtoIRXCAway, awayCorrectionTable = joinCorrectionFiles(combinedITXCAway, combinedIRXC, transactionBrowserRowCount)
 flterMissingIRXCAway.to_csv('missingCorrectionAway ' + todaysDate +'.csv', index=False)
