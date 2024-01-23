@@ -1,26 +1,17 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Apr 14 15:37:55 2023
-
 @author: dcox
 """
 
 import pandas as pd
-import datetime as dt
 from datetime import date
-import glob
-import numpy as np
 import os
-from io import StringIO
 from pathlib import Path
-
-import plotly.express as px
-from dash import dash_table
 from dash import Dash, dcc, html
-#import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 
-from dashy import *
+from dashy import processACK, processICTX, processICTXAway, processICRX, processICRXAway, processITXC, processITXCAway, processICLP, processICLPAway, processITAG, processITAGAway, processIRXC, processIRXCAway, joinFiles, joinCorrectionFiles
 
 today = date.today()
 transactionBrowserRowCount = 1000000
@@ -28,11 +19,6 @@ todaysDate = today.strftime("%m.%d")
 
 processedPath = "D:\IOP\IOP Phase II Sync\ProcessedFolder"
 sentPath = "D:\IOP\IOP Phase II Sync\SentFolder"
-
-#dir_path = os.path.dirname(os.path.realpath('__file__'))
-
-#processedPath = dir_path + "\processedFolder"
-#sentPath = dir_path + "\sentFolder"
 
 combinedACK = processACK(sentPath, processedPath)
 combinedICTX = processICTX(combinedACK, sentPath)
